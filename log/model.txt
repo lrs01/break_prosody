@@ -1,0 +1,69 @@
+m1_1 test_acc = 20.8 train_acc = 99
+    dropout = 0
+    epo = 50
+    Bid = False 
+    lr = 0.0001
+    
+
+
+m1_2 train_acc = 99   test_acc = 25
+    dropout = 0.3
+    epo = 100
+    Bid = True
+    lr = 0.0001
+m1_3 train_acc = 0.97  test_acc = 0.275
+    dropout =0.3
+    epo = 100
+    Bid = True
+    lr = 0.0001
+    Regular = 1e -4
+    numLayer = 2
+
+
+### 开始m1_4和m1_5进行k-10训练
+
+m1_4 :
+ train_acc = 0.64 test_acc = 0.69
+    dropout =0.2 ，0.2
+    epo = 200
+    Bid = True
+    lr = 0.00001
+    Regular = 1e -2
+    numLayer = 2
+
+
+m1_5 系列：m1_5_0:第五次实验对k折中的第1组实验
+          m1_5_1:第五次实验对k折中的第2组实验
+          m1_5_1_1 : 第五次实验对k折中的第2组实验的次级实验
+
+
+m1_5_0对应Model文件中 m1_5 :
+ train_acc = 0.65 test_acc = 0.56
+    dropout =0.2
+    epo = 200
+    Bid = True
+    lr = 0.00005
+    Regular = 1e -3
+    numLayer = 2
+
+m1_5_1 : 
+    train_acc = 0.67 ,test_acc = 0.66
+    dropout =0.2
+    epo = 200
+    Bid = True
+    lr = 0.00005
+    Regular = 1e -3
+    numLayer = 2
+
+m1_5_1_1:与m1_5_1其他都一样，但是发现epo可能不够，所以加大epo
+    train_acc =  ,test_acc = 
+    dropout =0.2
+    epo = 400
+    Bid = True
+    lr = 0.00005
+    Regular = 1e -3
+    numLayer = 2    
+
+
+
+
