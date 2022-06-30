@@ -6,7 +6,7 @@ import os
 import numpy as np
 import pickle
 import sys
-curPath = os.path.abspath(os.path.dirname('/home/lrs/dengfeng.p/break_feature/tool'))
+curPath = os.path.abspath(os.path.dirname('/disk2/lrs/dengfeng.p/break_feature/tool'))
 sys.path.append(curPath)
 from tool.k_Cross import k_cross
 from tool.data_deal import z_score_1

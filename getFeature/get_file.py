@@ -6,8 +6,8 @@ def t1():
     '''
     ## 创建 '/home/lrs/dengfeng.p/break_feature/Data/feature' 下文件夹
     '''
-    tgfile_path = r'/home/lrs/dengfeng.p/break_feature/Data/lab'
-    feature_path = r'/home/lrs/dengfeng.p/break_feature/Data/feature'
+    tgfile_path = r'/disk2/lrs/dengfeng.p/break_feature/Data/lab'
+    feature_path = r'/disk2/lrs/dengfeng.p/break_feature/Data/feature'
     tg_list = os.listdir(tgfile_path) ## 列出 tgfile_path 下的所有文件夹
     tg_list.sort() ## 排序
     # for i in tg_list:
@@ -49,8 +49,8 @@ def t2():
     '''
     ## 创建 '/home/lrs/dengfeng.p/break_feature/Data/feature' 下文件夹
     '''
-    tgfile_path = r'/home/lrs/dengfeng.p/break_feature/Data/lab'
-    feature_path = r'/home/lrs/dengfeng.p/break_feature/Data/feature'
+    tgfile_path = r'/disk2/lrs/dengfeng.p/break_feature/Data/lab'
+    feature_path = r'/disk2/lrs/dengfeng.p/break_feature/Data/feature'
     tg_list = os.listdir(tgfile_path) ## 列出 tgfile_path 下的所有文件夹
     tg_list.sort() ## 排序
     # for i in tg_list:
@@ -80,8 +80,8 @@ def t3():
     '''
     ## 创建 '/home/lrs/dengfeng.p/break_feature/Data/feature' 下文件夹
     '''
-    tgfile_path = r'/home/lrs/dengfeng.p/break_feature/Data/lab'
-    feature_path = r'/home/lrs/dengfeng.p/break_feature/Data/feature'
+    tgfile_path = r'/disk2/lrs/dengfeng.p/break_feature/Data/lab'
+    feature_path = r'/disk2/lrs/dengfeng.p/break_feature/Data/feature'
     tg_list = os.listdir(tgfile_path) ## 列出 tgfile_path 下的所有文件夹
     tg_list.sort() ## 排序
     # for i in tg_list:

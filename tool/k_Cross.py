@@ -7,7 +7,7 @@ def k_cross():
     '''
         返回10个不同的lab序列
     '''
-    feature_path = r'/home/lrs/dengfeng.p/break_feature/Data/feature'
+    feature_path = r'/disk2/lrs/dengfeng.p/break_feature/Data/feature'
     tg_list = os.listdir(feature_path) ## 列出 tgfile_path 下的所有文件夹
     tg_list.sort() ## 排序
     arr_lab = []
