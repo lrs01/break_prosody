@@ -50,7 +50,15 @@ def adjust_lr_rate(optimizer, epoch, start_lr):
                 param_group['lr'] = lr
 
 
-def getDict():
+def compute_s_k(input):
+  '''
+  计算偏度 和 峰度
+  '''
+  s = pd.Series(input)
+  return s.skew(),s.kurt()
+
+
+
 
   
 

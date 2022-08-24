@@ -25,21 +25,21 @@ from get_f_l_pkl import get_feature_label,get_train_test_form
 
 def acc(predict,label):
 
-    # cor = 0 ## 简单版本的ACC计算
-    # count = 0
-
+    ## 记录模型预测正确各个标签的数量
     cor_0 =0
     cor_1 =0
     cor_2 =0
     cor_3 =0
     cor_4 =0
 
+    ## 记录label中各个标签的总值
     total_0 = 0
     total_1 = 0
     total_2 = 0
     total_3 = 0
     total_4 = 0
 
+    ## batch中每个标签的acc
     acc_batch_0 = 0 
     acc_batch_1 = 0
     acc_batch_2 = 0
@@ -72,6 +72,8 @@ def acc(predict,label):
             elif b.item() ==4 :
                 cor_4 +=1
     
+
+    ## 如果真实标签中存在某个边界类型不存在，那么将其acc_batch赋值为2
     if total_0 == 0:
         acc_batch_0 = 2
     else :
@@ -117,12 +119,11 @@ def test_model(save_model,ind):
     device = torch.device("cuda" if torch.cuda.is_available()else "cpu")
     y = k_cross()
     _,test = get_train_test_form(y,ind)
-    mydataset = Dataset_l_f(train=test,flag=0)
-    loader = DataLoader(mydataset,batch_size=1,shuffle=True)
-    # model = save_model
+    mydataset = Dataset_l_f(train=test,flag=1) ## flag = 0 代表使用归一化之后数据
+    loader = DataLoader(mydataset,batch_size=1,shuffle=True) ## 没使用 自己写的collect_fun
     model = torch.load(save_model) ## 加载模型
-    model.eval()## 模型测试模式
     model.to(device)
+    model.eval()## 模型测试模式
     count = 0
     cor = 0
 
@@ -132,13 +133,12 @@ def test_model(save_model,ind):
         final_list = []
         for i ,batch in enumerate(loader):
             list_tool = []
-            feature , label = batch
-            feature_ = feature.to(device)
-            label_ = label.to(device)
-            outputs = model(feature_)
-            # print(label_[0])
-            # exit()
 
+            feature , label = batch
+            feature_ = feature.permute(0,2,1).to(device) # [batsize , feature_dim , seq_len]
+            label_ = label.to(device)
+            outputs = model(feature_) ## [batchsize , seq_len , class_num]
+            outputs = outputs.permute(0,2,1)
             _,maxdd = torch.max(outputs[0].permute(1,0).contiguous(),dim=1)
             # acc_k ,count =acc(predict=maxdd,label=label_)
             # acc_batch +=acc_k
@@ -146,9 +146,10 @@ def test_model(save_model,ind):
             # Acc = acc_batch/total
             
             acc_batch_0, acc_batch_1, acc_batch_2, acc_batch_3, acc_batch_4 = acc(predict=maxdd,label=label_)
-            list_tool = [acc_batch_0, acc_batch_1, acc_batch_2, acc_batch_3, acc_batch_4]
-            final_list.append(list_tool)
-    return final_list
+            print(f'0:{acc_batch_0}----1:{acc_batch_1}----2:{acc_batch_2}----3:{acc_batch_3}----4:{acc_batch_4}')
+    #         list_tool = [acc_batch_0, acc_batch_1, acc_batch_2, acc_batch_3, acc_batch_4]
+    #         final_list.append(list_tool)
+    # return final_list
 
             
        
@@ -160,44 +161,48 @@ def test_model(save_model,ind):
             
            
 if __name__=="__main__":
+    
+    save_model = '/disk2/lrs/dengfeng.p/break_feature/Model/LA_1/LA_0.pt'
+    test_model(save_model,ind=0)
 
-    model_file_path = "/home/lrs/dengfeng.p/break_feature/Model/M_1_5_2"
-    g = os.listdir(model_file_path)
-    g.sort()
-    acc_0 =[]
-    acc_1 = []
-    acc_2 = []
-    acc_3 = []
-    acc_4 = []
 
-    for i in g:
-        save_md = model_file_path + '/' + i
-        # acc_i = test_model(save_md,int(i[-4]))
-        # list_tool.append(acc_i)
-        final_list_ = test_model(save_md,int(i[-4]))
-        final_list_ = np.array(final_list_)
-        for j in range(final_list_.shape[0]):
-            if final_list_[j][0] != 2 :
-                acc_0.append(final_list_[j][0])
-            if final_list_[j][1] != 2 :
-                acc_1.append(final_list_[j][1])
-            if final_list_[j][2] != 2:
-                acc_2.append(final_list_[j][2])
-            if final_list_[j][3] != 2 :
-                acc_3.append(final_list_[j][3])
-            if final_list_[j][4] != 2 :
-                acc_4.append(final_list_[j][4])
+    # model_file_path = "/disk2/lrs/dengfeng.p/break_feature/Model/LA_1" 
+    # g = os.listdir(model_file_path)
+    # g.sort()
+    # acc_0 =[]
+    # acc_1 = []
+    # acc_2 = []
+    # acc_3 = []
+    # acc_4 = []
 
-    acc_0 = np.mean(np.array(acc_0))
-    acc_1 = np.mean(np.array(acc_1))
-    acc_2 = np.mean(np.array(acc_2))
-    acc_3 = np.mean(np.array(acc_3))
-    acc_4 = np.mean(np.array(acc_4))
-    print(acc_0,acc_1,acc_2,acc_3,acc_4)
+    # for i in g:
+    #     save_md = model_file_path + '/' + i
+    #     # acc_i = test_model(save_md,int(i[-4]))
+    #     # list_tool.append(acc_i)
+    #     final_list_ = test_model(save_md,int(i[-4]))
+    #     final_list_ = np.array(final_list_)
+    #     for j in range(final_list_.shape[0]):
+    #         if final_list_[j][0] != 2 :
+    #             acc_0.append(final_list_[j][0])
+    #         if final_list_[j][1] != 2 :
+    #             acc_1.append(final_list_[j][1])
+    #         if final_list_[j][2] != 2:
+    #             acc_2.append(final_list_[j][2])
+    #         if final_list_[j][3] != 2 :
+    #             acc_3.append(final_list_[j][3])
+    #         if final_list_[j][4] != 2 :
+    #             acc_4.append(final_list_[j][4])
 
-    # print(final_list_.shape)
+    # acc_0 = np.mean(np.array(acc_0))
+    # acc_1 = np.mean(np.array(acc_1))
+    # acc_2 = np.mean(np.array(acc_2))
+    # acc_3 = np.mean(np.array(acc_3))
+    # acc_4 = np.mean(np.array(acc_4))
+    # print(acc_0,acc_1,acc_2,acc_3,acc_4)
 
-        # exit
+    # # print(final_list_.shape)
+
+    # #     exit
     # list_tool = np.array(list_tool)
     # acc_mean = np.mean(list_tool)
     # print(acc_mean) ## 

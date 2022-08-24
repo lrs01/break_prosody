@@ -1,0 +1,6 @@
+# train parameters setting
+optimization: Adam
+learning_rate: 0.001
+batch_size: 64
+epoch: 200
+

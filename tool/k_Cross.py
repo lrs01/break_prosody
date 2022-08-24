@@ -11,7 +11,7 @@ def k_cross():
     tg_list = os.listdir(feature_path) ## 列出 tgfile_path 下的所有文件夹
     tg_list.sort() ## 排序
     arr_lab = []
-    c = 0 ## 计数功能
+    c = 0 ## 计数功能的
     for i in tg_list:
         lab_path = feature_path + '/' + i
         arr_lab.append(lab_path)

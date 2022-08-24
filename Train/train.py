@@ -1,6 +1,5 @@
 
-from itertools import count
-from matplotlib.pyplot import flag
+
 import torch 
 
 import torch.nn as nn 
@@ -13,7 +12,7 @@ current_dir=os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe
 os.chdir(current_dir)
 sys.path.append('../')
 import numpy
-from Model.Model import model
+# from Model.Model import model
 from Train.Dateset import Dataset_l_f
 from tool.k_Cross import k_cross
 from get_f_l_pkl import get_feature_label,get_train_test_form
