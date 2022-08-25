@@ -90,7 +90,7 @@ def get_pitch(tg_filepath):
                         l.append(xmin)
                         l.append(xmax)      
                         break
-            else :
+            elif tg_.tiers[PY][j]!='tl':
                 xmin = tg_.tiers[PY][j].minTime
                 xmax = tg_.tiers[PY][j].maxTime
                 for i in range(len(tg_.tiers[DE])):
@@ -188,7 +188,7 @@ def get_duration(tg_filepath):
                     xmax = tg_.tiers[PY][j].maxTime
                     l.append(xmin)
                     l.append(xmax)   
-            else :
+            elif tg_.tiers[PY][j]!='tl':
                 xmin = tg_.tiers[PY][j].minTime
                 xmax = tg_.tiers[PY][j].maxTime
                 l.append(xmin)
@@ -271,7 +271,7 @@ def get_intensity(tg_filepath):
                     xmax = tg_.tiers[PY][j].maxTime
                     l.append(xmin)
                     l.append(xmax)   
-            else :
+            elif tg_.tiers[PY][j]!='tl':
                 xmin = tg_.tiers[PY][j].minTime
                 xmax = tg_.tiers[PY][j].maxTime
                 l.append(xmin)
@@ -317,7 +317,6 @@ def get_intensity(tg_filepath):
 
 def get_label(tg_filepath):
 
-    tg_filepath = tg_filepath
     tg_ = textgrid.TextGrid()
     tg_.read(tg_filepath)
 
@@ -342,7 +341,6 @@ def get_label(tg_filepath):
     xmin = 0
     xmax = 0
     xmin_ = 0
-    frame_shift = 0.01 ## 帧移10ms
     arr = []
     i = 0
     for j in range(len(tg_.tiers[PY])):
@@ -361,7 +359,7 @@ def get_label(tg_filepath):
                     xmax = tg_.tiers[PY][j].maxTime
                     l.append(xmin)
                     l.append(xmax)   
-            else :
+            elif tg_.tiers[PY][j]!='tl' : 
                 xmin = tg_.tiers[PY][j].minTime
                 xmax = tg_.tiers[PY][j].maxTime
                 l.append(xmin)
@@ -400,23 +398,24 @@ def get_mel_syllable(tg_filepath):
 
 
 
-    
+
+
 
 
 
 
 if __name__=="__main__":
     ## 测试
-    path1 = '/home/lrs/dengfeng.p/break_feature/Data/lab/f001lab/f001001_01.TextGrid'
+    path1 = '/disk2/lrs/dengfeng.p/break_feature/Data/lab/f001lab/f001001_02.TextGrid'
     # path2 = '/home/lrs/dengfeng.p/break_feature/Data/lab/f002lab/f002001_01.TextGrid'
     
     arr_mark = get_label(path1)
-    print(arr_mark.shape)
+    print(arr_mark) 
+    
     # print(arr_BI.shape,arr.shape)
     # print(arr)
     # print(arr_BI)
-    # print(arr_BI.shape[0])
-    # tg_ = textgrid.TextGrid()
+    # print(arr_BI.shape[0]) 
     # tg_.read(path1)
 
     # ## 找到拼音层
@@ -440,9 +439,12 @@ if __name__=="__main__":
 
     # pkl = '/home/lrs/dengfeng.p/break_feature/Data/feature/m002lab/m002013_03/f0.pkl'
     # data = open(pkl,'rb')
-    # readdata = pickle.load(data)
+    # readdata = pickle.load(data)发给
     # print(readdata.shape)
     # data.close()
+
+
+
 
     
 
